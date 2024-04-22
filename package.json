@@ -5,6 +5,7 @@
   "keywords": [],
   "main": "src/index.js",
   "dependencies": {
+    "@uiw/react-heat-map": "^2.2.2",
     "date-fns": "^3.6.0",
     "react": "16.4.2",
     "react-calendar-heatmap": "1.7.0",

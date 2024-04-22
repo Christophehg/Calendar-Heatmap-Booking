@@ -18,7 +18,7 @@ h1 {
 
  .react-calendar-heatmap {
   /* border: 5px solid black; */
-  width: 80%; /* Définissez la largeur souhaitée */
+  width: 85%; /* Définissez la largeur souhaitée */
 }
 
 .react-calendar-heatmap text {
@@ -54,29 +54,45 @@ h1 {
 .react-calendar-heatmap .empty {
   fill: #eeeeee;
 }
-.react-calendar-heatmap .green {
-  fill: #96CCA8;
+.react-calendar-heatmap .green1 {
+  fill: #d6e685;
 }
+.react-calendar-heatmap .green2 {
+  fill: #8cc665;
+}
+.react-calendar-heatmap .green3 {
+  fill: #44a340;
+}
+.react-calendar-heatmap .green4 {
+  fill: #488645;
+}
+.react-calendar-heatmap .green5 {
+  fill: #1e6823;
+}
+
+
 .react-calendar-heatmap .red {
-  fill: #FA8072;
+  fill: #f57b7b;
 }
 
-/*
- * Gitlab color scale
- */
 
-.react-calendar-heatmap .color-gitlab-0 {
-  fill: #ededed;
+.react-calendar-heatmap rect {
+  rx: 3px; /* Rayon de coin horizontal */
+  ry: 3px; /* Rayon de coin vertical */
 }
-.react-calendar-heatmap .color-gitlab-1 {
-  fill: #acd5f2;
+
+
+/* Styles pour la légende */
+.legend {
+  display: flex;
+  justify-content: end;
+  margin-right: 8%;
 }
-.react-calendar-heatmap .color-gitlab-2 {
-  fill: #7fa8d1;
-}
-.react-calendar-heatmap .color-gitlab-3 {
-  fill: #49729b;
-}
-.react-calendar-heatmap .color-gitlab-4 {
-  fill: #254e77;
+
+.legend-item {
+  display: inline-block;
+  width: 2%;
+  border-radius: 20%;
+  height: 20px;
+  margin: 5px;
 }
