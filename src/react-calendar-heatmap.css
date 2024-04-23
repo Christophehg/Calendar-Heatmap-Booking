@@ -63,11 +63,12 @@ h1 {
 
 /* Styles pour la légende */
 .legend {
-  margin-left: 11.5%;
+  margin-left: 11.25%;
 }
 
 .legend-item {
   width: 1%;
   border-radius: 10%;
   margin: 5px;
+  font-size: 2vmin;
 }
