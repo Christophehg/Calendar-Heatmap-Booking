@@ -1,25 +1,25 @@
-// Import des modules nécessaires depuis React et ReactDOM
+// Import des modules
 import React from "react";
 import ReactDOM from "react-dom";
 
-// Import du composant CalendarHeatmap et ReactTooltip ainsi que les fichiers CSS associés
+// Import du composant CalendarHeatmap et ReactTooltip
 import CalendarHeatmap from "react-calendar-heatmap";
 import ReactTooltip from "react-tooltip";
 import "./styles.css";
 import "./react-calendar-heatmap.css";
 
-// Création d'une instance de date représentant aujourd'hui
+// Création d'une instance de date
 const today = new Date();
 
 
-// Définition du composant principal de l'application
+// Définition du composant principal
 function App() {
-  // Détermination de la date exactement à mi-chemin entre aujourd'hui et 182 jours avant et après aujourd'hui
+  // Détermination de la date entre aujourd'hui avant et après aujourd'hui
   const halfYearBefore = shiftDate(today, -182); // 182 jours avant aujourd'hui
   const halfYearAfter = shiftDate(today, 182); // 182 jours après aujourd'hui
   
 
-  // Définition des valeurs à afficher dans le heatmap (modifiable)
+  // Définition des valeurs à afficher dans le heatmap
   const myValues = [
     { date: new Date("2024-01-01"), count: 0 },
     { date: new Date("2024-01-10"), count: 0 },
@@ -33,10 +33,9 @@ function App() {
     { date: new Date("2024-05-08"), count: 4 },
     { date: new Date("2024-05-30"), count: 5 },
     { date: new Date("2024-05-31"), count: 5 },
-    // Vous pouvez ajouter vos propres valeurs ici
   ];
 
-  // Rendu du composant avec les valeurs et les propriétés spécifiées
+  // Rendu du composant avec les valeurs et les propriétés
   return (
     <div>
       <h1>Période de réservation</h1>
@@ -45,10 +44,12 @@ function App() {
           startDate={halfYearBefore}
           endDate={halfYearAfter}
 
+          // Modification des dates en français
           weekdayLabels={['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam']}
           monthLabels={['Janv', 'Fév', 'Mars', 'Avril', 'Mai', 'Juin', 'Juil', 'Août', 'Sept', 'Oct', 'Nov', 'Déc']}
 
-          values={myValues} // Utilisation des valeurs définies ci-dessus
+          values={myValues} // Utilisation des valeurs définies
+          // Attribution des couleurs en fonction des counts
           classForValue={(value) => {
             if (!value) {
               return "empty";
@@ -99,17 +100,19 @@ function App() {
             };
           }}
           
-          //Afficher les jours de la semaine
+          // Affiche les jours de la semaine
           showWeekdayLabels={true}
         />
         <ReactTooltip />
       </div>
       <div className="legend">
-        <span className="legend-item" style={{ backgroundColor: '#d6e685' }}>0</span>
-        <span className="legend-item" style={{ backgroundColor: '#8cc665' }}>1</span>
-        <span className="legend-item" style={{ backgroundColor: '#44a340' }}>2</span>
-        <span className="legend-item" style={{ backgroundColor: '#488645' }}>3</span>
-        <span className="legend-item" style={{ backgroundColor: '#1e6823' }}>4</span>
+        <span className="legend-item">Moins</span>
+        <span className="legend-item" style={{ backgroundColor: '#d6e685' }}>20%</span>
+        <span className="legend-item" style={{ backgroundColor: '#8cc665' }}>40%</span>
+        <span className="legend-item" style={{ backgroundColor: '#44a340' }}>60%</span>
+        <span className="legend-item" style={{ backgroundColor: '#488645' }}>80%</span>
+        <span className="legend-item" style={{ backgroundColor: '#1e6823' }}>100%</span>
+        <span className="legend-item">Plus</span>
       </div>
     </div>
   );
