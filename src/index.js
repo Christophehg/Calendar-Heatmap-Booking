@@ -21,9 +21,17 @@ function App() {
 
   // Définition des valeurs à afficher dans le heatmap
   const myValues = [
-    { date: new Date("2024-01-01"), count: 0 },
-    { date: new Date("2024-01-10"), count: 0 },
-    { date: new Date("2024-01-15"), count: 0 },
+    // Les valeurs générées par getRange et shiftDate
+    ...getRange(1000).map(index => {
+      return {
+        date: shiftDate('2023', index),
+        count: 0,
+      };
+    }),
+    // La date spécifique que vous voulez ajouter
+    { date: new Date("2024-01-01"), count: 6 },
+    { date: new Date("2024-01-10"), count: 6 },
+    { date: new Date("2024-01-15"), count: 6 },
     { date: new Date("2024-02-13"), count: 1 },
     { date: new Date("2024-02-14"), count: 1 },
     { date: new Date("2024-02-29"), count: 2 },
@@ -34,6 +42,7 @@ function App() {
     { date: new Date("2024-05-30"), count: 5 },
     { date: new Date("2024-05-31"), count: 5 },
   ];
+    
 
   // Rendu du composant avec les valeurs et les propriétés
   return (
@@ -55,6 +64,9 @@ function App() {
               return "empty";
             }
             if (value.count === 0) {
+              return "empty";
+            }
+            if (value.count === 6) {
               return "red";
             }
             if (value.count === 1) {
@@ -78,7 +90,7 @@ function App() {
             const formattedDate = value && value.date ? value.date.toLocaleDateString('fr-FR', { day: '2-digit', month: '2-digit', year: 'numeric' }) : "Date";
             // Définition du message personnalisé pour value.count
             let countMessage;
-            if (value && value.count === 0) {
+            if (value && value.count === 6) {
               countMessage = "Réservée";
             } else if (value && value.count === 1) {
               countMessage = "20%";
@@ -92,7 +104,7 @@ function App() {
               countMessage = "100%";
             } else if (value) {
               
-              countMessage = `Indisponible`;
+              countMessage = `Vide`;
             }
             // Retourne l'objet d'attribut pour le tooltip
             return {
@@ -102,11 +114,14 @@ function App() {
           
           // Affiche les jours de la semaine
           showWeekdayLabels={true}
+          // Rempli les coins du calendrier
+          showOutOfRangeDays={true}
         />
         <ReactTooltip />
       </div>
       <div className="legend">
         <span className="legend-item">Moins</span>
+        <span className="legend-item" style={{ backgroundColor: '#f57b7b' }}>Réservée</span>
         <span className="legend-item" style={{ backgroundColor: '#d6e685' }}>20%</span>
         <span className="legend-item" style={{ backgroundColor: '#8cc665' }}>40%</span>
         <span className="legend-item" style={{ backgroundColor: '#44a340' }}>60%</span>
@@ -123,6 +138,11 @@ function shiftDate(date, numDays) {
   const newDate = new Date(date);
   newDate.setDate(newDate.getDate() + numDays);
   return newDate;
+}
+
+// Attribut un count à tout les events
+function getRange(count) {
+  return Array.from({ length: count }, (_, i) => i);
 }
 
 // Rendu de l'application dans l'élément avec l'ID "root"
